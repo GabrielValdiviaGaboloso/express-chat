@@ -15,6 +15,7 @@ const mongoURI = 'mongodb+srv://gaboangel123:7FgfNTYmdlJKQHcg@cluster-chat-react
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 20000,
 });
 
 // Definir el esquema y modelo de mensaje
