@@ -1,16 +1,19 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
-const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
-const cors = require('cors');
+
+// Configuración de CORS para permitir peticiones desde tu frontend
+app.use(cors({
+  origin: 'https://prueba-chat.netlify.app', // URL del frontend en Netlify
+  methods: ['GET', 'POST'],
+}));
 
 const port = process.env.PORT || 3000;
-
-
 
 // Configurar el socket
 io.on('connection', (socket) => {
@@ -27,21 +30,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// Configurar Express para servir los archivos del frontend (build de React)
-app.use(cors({
-    origin: 'https://prueba-chat.netlify.app', // Reemplaza con la URL de tu frontend en Netlify
-    methods: ['GET', 'POST'],
-  }));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../chat-app-client/build', 'index.html'));
-});
-
 // Iniciar el servidor
-// server.listen(3000, () => {
-//   console.log('Servidor escuchando en http://localhost:3000');
-// });ssssss
-
 server.listen(port, () => {
-    console.log(`Servidor escuchando en el puerto ${port}`);
-  });
+  console.log(`Servidor escuchando en el puerto ${port}`);
+});
