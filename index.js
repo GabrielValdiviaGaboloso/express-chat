@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
 
 // Configurar Express para servir los archivos del frontend (build de React)
 app.use(cors({
-    origin: 'https://express-chat-26up.onrender.com', // Reemplaza con la URL de tu frontend en Netlify
+    origin: 'https://prueba-chat.netlify.app', // Reemplaza con la URL de tu frontend en Netlify
     methods: ['GET', 'POST'],
   }));
 
@@ -40,7 +40,7 @@ app.get('*', (req, res) => {
 // Iniciar el servidor
 // server.listen(3000, () => {
 //   console.log('Servidor escuchando en http://localhost:3000');
-// });
+// });ssssss
 
 server.listen(port, () => {
     console.log(`Servidor escuchando en el puerto ${port}`);
