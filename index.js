@@ -11,12 +11,17 @@ const io = new Server(server);
 const port = process.env.PORT || 3000; // Usa el puerto asignado por Render
 
 // Conectar a MongoDB Atlas
-const mongoURI = 'mongodb+srv://gaboangel123:7FgfNTYmdlJKQHcg@cluster-chat-react.re8rl.mongodb.net/chat-app?retryWrites=true&w=majority&appName=Cluster-chat-react'; // Asegúrate de que la base de datos esté especificada
+const mongoURI = 'mongodb+srv://gaboangel123:7FgfNTYmdlJKQHcg@cluster-chat-react.re8rl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-chat-react'; // Asegúrate de que la base de datos esté especificada
+
 mongoose.connect(mongoURI, {
-  serverSelectionTimeoutMS: 20000, // Aumentar tiempo de espera
-})
-.then(() => console.log('Conectado a MongoDB'))
-.catch(err => console.error('Error de conexión a MongoDB:', err));
+    serverSelectionTimeoutMS: 30000,
+  })
+  .then(() => console.log('Conectado a MongoDB'))
+  .catch(err => {
+    console.error('Error de conexión a MongoDB:', err);
+    process.exit(1); // Terminar el proceso si no se puede conectar
+  });
+  
 
 // Definir el esquema y modelo de mensaje
 const messageSchema = new mongoose.Schema({
